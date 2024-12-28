@@ -3,6 +3,20 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include <catppuccin.h>
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow *window) {
+    /* ESC closes app*/
+    if ( GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -11,8 +25,12 @@ int main(void)
     if (!glfwInit())
         return -1;
 
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "GameEngine", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -30,17 +48,24 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
+    /* Adjust Viewport on resize */
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        /* Process inputs */
+        processInput(window);
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        /* Render here */
+        glClearColor(BASEr, BASEg, BASEb, BASEa);
+        glClear(GL_COLOR_BUFFER_BIT);
 
         /* Poll for and process events */
         glfwPollEvents();
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(window);
     }
 
     glfwTerminate();

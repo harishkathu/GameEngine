@@ -28,6 +28,7 @@
   <ItemGroup>
     <ClInclude Include="deps\include\GLFW\glfw3.h" />
     <ClInclude Include="deps\include\GLFW\glfw3native.h" />
+    <ClInclude Include="include\catppuccin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
