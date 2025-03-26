@@ -1,5 +1,16 @@
 !.gitignore
 
+*.vcxproj*
+*.sln
+*.cmake
+CMakeCache.txt
+
 .vs/
+build/
+nvim_build/
 GameEngine/
+GameEngine.dir/
 X64/
+CMakeFiles/
+Debug/
+Release/
